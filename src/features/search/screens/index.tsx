@@ -17,6 +17,7 @@ type SectionProps = PropsWithChildren<{
 
 function screens({navigation}: SectionProps): React.JSX.Element {
   const [loading, setloading] = useState<boolean>(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
   const [data, setData] = useState<any>(null);
 
   const inputRef = useRef<TextInput>(null);
@@ -43,11 +44,17 @@ function screens({navigation}: SectionProps): React.JSX.Element {
     }
   };
 
+  const onRefresh = () => {
+    setRefreshing(true);
+    onSubmit();
+  };
+
   const handleOnChange = (val: string) => {
     setInputVal(val);
     setUserFetched(false);
     setData(null);
   };
+
   return (
     <AppContainer scroll={false}>
       <View
