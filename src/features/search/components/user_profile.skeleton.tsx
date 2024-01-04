@@ -1,22 +1,17 @@
 import React from 'react';
+import {StyleSheet, View} from 'react-native';
+
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+  AppContainer,
+  Container,
+  ScrollableContainer,
+  Skeleton,
+} from '../../../__shared/components';
 
-import Skeleton from '../../../__shared/components/Skeleton';
-
-function screens(navigation: any): React.JSX.Element {
+function ScreensSkeleton(): React.JSX.Element {
   return (
-    <SafeAreaView>
-      <StatusBar />
-      <ScrollView
-        style={{paddingHorizontal: 15, paddingTop: 20}}
-        contentInsetAdjustmentBehavior="automatic">
+    <ScrollableContainer contentInsetAdjustmentBehavior="automatic">
+      <Container>
         <View style={styles.container}>
           <Skeleton type="circle" width={70} height={70} />
           <View style={styles.userDetails}>
@@ -38,8 +33,8 @@ function screens(navigation: any): React.JSX.Element {
           <Skeleton type="circle" width={16} height={16} />
           <Skeleton width={'50%'} height={14} />
         </View>
-      </ScrollView>
-    </SafeAreaView>
+      </Container>
+    </ScrollableContainer>
   );
 }
 
@@ -64,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default screens;
+export default ScreensSkeleton;

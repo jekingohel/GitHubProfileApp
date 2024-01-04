@@ -1,67 +1,82 @@
-import React from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import React, {PropsWithChildren, useRef, useState} from 'react';
+import {AppContainer, Text, View} from '../../../__shared/components';
+import Skeleton from '../components/user_profile.skeleton';
+import UserDetails from '../components/user_profile.details';
+import {TextInput, TouchableOpacity} from 'react-native';
+import Requests from '../../../requests';
 
-import Skeleton from '../../../__shared/components/Skeleton';
+type SectionProps = PropsWithChildren<{
+  navigation: any;
+  search_text?: string | number;
+}>;
 
-function screens(): React.JSX.Element {
+function screens({navigation}: SectionProps): React.JSX.Element {
+  const [loading, setloading] = useState<boolean>(false);
+  const [data, setData] = useState<any>(null);
+
+  const inputRef = useRef<TextInput>(null);
+  const [inputVal, setInputVal] = useState('');
+
+  const onSubmit = () => {
+    setloading(true);
+    if (inputVal) {
+      Requests.GetUser(inputVal)
+        .then(res => {
+          setloading(false);
+          setData(res);
+        })
+        .catch(err => {
+          setloading(false);
+          console.log(err);
+        });
+    } else {
+      setloading(false);
+      setData(null);
+    }
+  };
+
   return (
-    <SafeAreaView>
-      <StatusBar />
-      <ScrollView
-        style={{paddingHorizontal: 15, paddingTop: 20}}
-        contentInsetAdjustmentBehavior="automatic">
-        <View style={styles.container}>
-          <Skeleton type="circle" width={70} height={70} />
-          <View style={styles.userDetails}>
-            <Skeleton width={'60%'} height={24} />
-            <Skeleton width={'40%'} height={20} />
-          </View>
-        </View>
-        <Skeleton width={'100%'} height={14} style={{marginTop: 15}} />
-        <Skeleton width={'90%'} height={14} style={{marginTop: 5}} />
-        <View style={[styles.iconText, {marginTop: 20}]}>
-          <Skeleton type="circle" width={16} height={16} />
-          <Skeleton width={'50%'} height={14} />
-        </View>
-        <View style={styles.iconText}>
-          <Skeleton type="circle" width={16} height={16} />
-          <Skeleton width={'50%'} height={14} />
-        </View>
-        <View style={styles.iconText}>
-          <Skeleton type="circle" width={16} height={16} />
-          <Skeleton width={'50%'} height={14} />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <AppContainer scroll={false}>
+      <View
+        transparent
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        style={{
+          padding: 10,
+          columnGap: 15,
+          borderBottomWidth: 1,
+          borderBottomColor: '#F4F4F4',
+        }}>
+        <TextInput
+          ref={inputRef}
+          editable
+          clearButtonMode="always"
+          style={{
+            backgroundColor: '#e6e6e6',
+            fontSize: 15,
+            borderWidth: 0,
+            flexShrink: 1,
+            flexGrow: 1,
+            padding: 10,
+            borderRadius: 10,
+          }}
+          onChangeText={val => setInputVal(val)}
+          placeholder="Search GitHub"
+        />
+        <TouchableOpacity activeOpacity={0.5} onPress={onSubmit}>
+          <Text fontSize={20} lineHeight={30} color="#3399ff">
+            Submit
+          </Text>
+        </TouchableOpacity>
+      </View>
+      {loading ? (
+        <Skeleton />
+      ) : (
+        <UserDetails data={data} navigation={navigation} />
+      )}
+    </AppContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'row',
-    columnGap: 15,
-    justifyContent: 'flex-start',
-  },
-  userDetails: {
-    flex: 1,
-    flexDirection: 'column',
-    rowGap: 5,
-  },
-  iconText: {
-    flex: 1,
-    flexDirection: 'row',
-    columnGap: 5,
-    marginTop: 10,
-  },
-});
 
 export default screens;
