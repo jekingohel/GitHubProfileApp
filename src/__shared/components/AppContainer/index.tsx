@@ -37,11 +37,12 @@ const AppContainer: React.FC<AppContainerProps> = props => {
           <ScrollView
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={scrollBar ?? false}
+            contentContainerStyle={{flex: 1}}
             {...props}>
             {props.children}
           </ScrollView>
         ) : (
-          <>{props.children}</>
+          props.children
         )}
       </KeyboardAvoidingView>
     </SafeAreaView>

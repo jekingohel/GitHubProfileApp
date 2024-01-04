@@ -12,6 +12,7 @@ interface CustomViewProps {
 
 const View: React.FC<CustomViewProps> = props => {
   const {
+    children,
     alignItems = 'stretch',
     justifyContent = 'flex-start',
     flexDirection = 'column',
@@ -22,13 +23,10 @@ const View: React.FC<CustomViewProps> = props => {
     alignItems,
     justifyContent,
     flexDirection,
+    ...props.style,
   };
 
-  return (
-    <RNView style={containerStyle} {...props.style}>
-      {props.children}
-    </RNView>
-  );
+  return <RNView style={containerStyle}>{children}</RNView>;
 };
 
 export default View;

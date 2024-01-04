@@ -1,16 +1,17 @@
 import {
   createNavigationContainerRef,
-  NavigationContainerRef,
+  CommonActions,
 } from '@react-navigation/native';
 import {StackActions} from '@react-navigation/native';
 
 export const navigationRef = createNavigationContainerRef();
 
-export function navigate(name: string, params?: object) {
+export function navigate(routeName: string, params?: object) {
   if (navigationRef.isReady()) {
-    navigationRef.navigate(name, params);
+    navigationRef.dispatch(CommonActions.navigate(routeName, params));
   } else {
-    // Handle the case when react navigation is not ready
+    // You can decide what to do if react navigation is not ready
+    // You can ignore this, or add these actions to a queue you can call later
   }
 }
 

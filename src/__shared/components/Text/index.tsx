@@ -23,7 +23,9 @@ interface CustomViewProps {
   fontWeight?: FontWeight;
   align?: Align;
   color?: string;
+  lineHeight?: number | undefined;
   italic?: boolean;
+  style?: object | undefined;
 }
 
 const Text: React.FC<CustomViewProps> = props => {
@@ -31,7 +33,8 @@ const Text: React.FC<CustomViewProps> = props => {
     fontSize = 12,
     fontWeight = '400',
     align = 'left',
-    color = 'black',
+    color = '#000000',
+    lineHeight = 18,
     italic = false,
   } = props;
 
@@ -40,7 +43,9 @@ const Text: React.FC<CustomViewProps> = props => {
     fontWeight,
     textAlign: align,
     color,
+    lineHeight,
     fontStyle: italic ? 'italic' : 'normal',
+    ...props.style,
   };
 
   return <RNText style={containerStyle}>{props.children}</RNText>;

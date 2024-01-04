@@ -10,14 +10,13 @@ function AppNavigator(): React.JSX.Element {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Search Screen"
-        // screenOptions={{headerShown: false}}
-      >
+        initialRouteName="Search"
+        screenOptions={{headerShown: false}}>
         <Stack.Group>
-          <Stack.Screen name="Search Screen" component={Search} />
-          <Stack.Screen name="UserProfile Screen" component={UserProfile} />
+          <Stack.Screen name="Search" component={Search} />
+          <Stack.Screen name="UserProfile" component={UserProfile} />
           <Stack.Screen
-            name="FollowersFollowing Screen"
+            name="FollowersFollowing"
             component={FollowersFollowing}
           />
         </Stack.Group>
