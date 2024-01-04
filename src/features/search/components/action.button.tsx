@@ -29,7 +29,7 @@ function ActionBtn({
         fontWeight="600">
         {title}
       </Text>
-      <Text fontSize={15} lineHeight={21} color="rgb(31,35,40)">
+      <Text fontSize={15} lineHeight={21} color="rgb(101,109,118)">
         {subTitle}
       </Text>
     </TouchableOpacity>

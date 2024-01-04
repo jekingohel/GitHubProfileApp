@@ -1,7 +1,12 @@
 import React, {PropsWithChildren, useRef, useState} from 'react';
-import {AppContainer, Text, View} from '../../../__shared/components';
-import Skeleton from '../components/user_profile.skeleton';
-import UserDetails from '../components/user_profile.details';
+import {
+  AppContainer,
+  Text,
+  View,
+  StatusMessage,
+} from '../../../__shared/components';
+import Skeleton from '../components/user-details.skeleton';
+import UserDetails from '../components/user-details';
 import {TextInput, TouchableOpacity} from 'react-native';
 import Requests from '../../../requests';
 
@@ -16,6 +21,7 @@ function screens({navigation}: SectionProps): React.JSX.Element {
 
   const inputRef = useRef<TextInput>(null);
   const [inputVal, setInputVal] = useState('');
+  const [isUserFetched, setUserFetched] = useState<boolean>(false);
 
   const onSubmit = () => {
     setloading(true);
@@ -23,11 +29,13 @@ function screens({navigation}: SectionProps): React.JSX.Element {
       Requests.GetUser(inputVal)
         .then(res => {
           setloading(false);
+          setUserFetched(true);
           setData(res);
         })
         .catch(err => {
           setloading(false);
-          console.log(err);
+          setData(null);
+          setUserFetched(true);
         });
     } else {
       setloading(false);
@@ -35,6 +43,11 @@ function screens({navigation}: SectionProps): React.JSX.Element {
     }
   };
 
+  const handleOnChange = (val: string) => {
+    setInputVal(val);
+    setUserFetched(false);
+    setData(null);
+  };
   return (
     <AppContainer scroll={false}>
       <View
@@ -51,9 +64,10 @@ function screens({navigation}: SectionProps): React.JSX.Element {
         <TextInput
           ref={inputRef}
           editable
+          autoCapitalize="none"
           clearButtonMode="always"
           style={{
-            backgroundColor: '#e6e6e6',
+            backgroundColor: '#f4f4f4',
             fontSize: 15,
             borderWidth: 0,
             flexShrink: 1,
@@ -61,19 +75,30 @@ function screens({navigation}: SectionProps): React.JSX.Element {
             padding: 10,
             borderRadius: 10,
           }}
-          onChangeText={val => setInputVal(val)}
-          placeholder="Search GitHub"
+          onChangeText={handleOnChange}
+          placeholder="Search User"
         />
         <TouchableOpacity activeOpacity={0.5} onPress={onSubmit}>
-          <Text fontSize={20} lineHeight={30} color="#3399ff">
+          <Text fontSize={18} lineHeight={30} color="#3399ff">
             Submit
           </Text>
         </TouchableOpacity>
       </View>
-      {loading ? (
-        <Skeleton />
-      ) : (
+      {loading && <Skeleton />}
+      {!loading && isUserFetched && data && (
         <UserDetails data={data} navigation={navigation} />
+      )}
+      {!loading && isUserFetched && data === null && inputVal !== '' && (
+        <StatusMessage
+          title="Not Found"
+          description="User could not be found. Please double-check the username and try again."
+        />
+      )}
+      {!loading && !isUserFetched && data === null && (
+        <StatusMessage
+          title="Find GitHub Users."
+          description="Search GitHub user and discover profiles efficiently."
+        />
       )}
     </AppContainer>
   );
