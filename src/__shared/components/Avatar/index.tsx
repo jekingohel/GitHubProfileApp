@@ -1,13 +1,6 @@
-import React, {useState} from 'react';
-import {
-  ActivityIndicator,
-  Dimensions,
-  Image,
-  Pressable,
-  TouchableOpacity,
-} from 'react-native';
+import React from 'react';
+import {Image, Pressable} from 'react-native';
 import Text from '../Text';
-import PropTypes from 'prop-types';
 
 interface AvatarProps {
   source: string | null;
@@ -32,8 +25,6 @@ const sizeArray = {
   large: 65,
 };
 
-const {width, height} = Dimensions.get('window');
-
 const Avatar: React.FC<AvatarProps> = props => {
   const {
     containerStyle,
@@ -47,7 +38,6 @@ const Avatar: React.FC<AvatarProps> = props => {
     onPress = () => {},
     backgroundColor = 'rgba(142,142,147,.8)',
     textColor = '#FFFFFF',
-    customColor = null,
     customSize = 0,
   } = props;
   const initialis = title
@@ -83,6 +73,7 @@ const Avatar: React.FC<AvatarProps> = props => {
     </Pressable>
   ) : (
     <Pressable
+      testID="avatar-pressable"
       {...props}
       disabled={!onPress && !fullView}
       onPress={() => {
@@ -90,6 +81,7 @@ const Avatar: React.FC<AvatarProps> = props => {
       }}
       style={[{position: 'relative'}]}>
       <Image
+        testID="avatar-image"
         {...imageProps}
         source={{uri: source}}
         style={[

@@ -47,6 +47,7 @@ function TextWithIcon({
       style={{columnGap: 10}}>
       {iconSource && (
         <Image
+          testID="icon"
           source={iconSource}
           style={{width: imageWidth, height: imageHeight}}
           resizeMode="contain"

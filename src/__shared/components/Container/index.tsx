@@ -1,10 +1,10 @@
 import React from 'react';
-import {ViewStyle} from 'react-native'; // Update the import with ViewStyle if necessary
+import {ViewStyle} from 'react-native';
 import View from '../View';
 
 interface CustomViewProps {
   children: React.ReactNode;
-  style?: ViewStyle; // Add the style prop here
+  style?: ViewStyle;
 }
 
 const Container: React.FC<CustomViewProps> = props => {
