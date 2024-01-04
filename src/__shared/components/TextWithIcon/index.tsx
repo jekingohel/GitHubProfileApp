@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 import {Image} from 'react-native';
 
-import {Text, View} from '../../../__shared/components';
+import {Text, View} from '../';
 
 type FontWeight =
   | 'normal'
@@ -18,7 +18,7 @@ type FontWeight =
   | undefined;
 
 type propsType = PropsWithChildren<{
-  source?: any | undefined;
+  iconSource?: any | undefined;
   text?: any;
   fontSize?: number;
   lineHeight?: number;
@@ -27,8 +27,8 @@ type propsType = PropsWithChildren<{
   imageSize?: any;
 }>;
 
-function TextWithImage({
-  source = null,
+function TextWithIcon({
+  iconSource = null,
   text,
   fontSize,
   lineHeight,
@@ -45,9 +45,9 @@ function TextWithImage({
       flexDirection="row"
       alignItems="center"
       style={{columnGap: 10}}>
-      {source && (
+      {iconSource && (
         <Image
-          source={source}
+          source={iconSource}
           style={{width: imageWidth, height: imageHeight}}
           resizeMode="contain"
         />
@@ -63,4 +63,4 @@ function TextWithImage({
   );
 }
 
-export default TextWithImage;
+export default TextWithIcon;
