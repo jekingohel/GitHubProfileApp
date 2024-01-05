@@ -1,6 +1,6 @@
 # GitHub Profile App
 
-This mobile application allows users to search for GitHub profiles by username, view user details, and navigate through followers and following lists. The app fetches GitHub user data using the [GitHub REST API](https://docs.github.com/en/rest).
+This mobile application allows users to search for GitHub profiles by username, view user details, and navigate through followers and following lists. The app fetches GitHub user data using the GitHub REST API.
 
 ## Screenshot
 ![screenshot](https://github.com/jekingohel/GitHubProfileApp/assets/2361463/27e2ffa4-c789-4195-b194-7e8585c0960b)
@@ -69,8 +69,8 @@ This mobile application allows users to search for GitHub profiles by username, 
 - Test navigating backward through the app.
 - Ensure the expected views are displayed after navigation.
 
-## Total Hours Spent
-Total hours spent on completing this task: 10 hours
+## Time Investment
+The completion of this project required a thoughtful investment of time. The total hours dedicated to the development, testing, and refinement of the GitHub Profile App amounted to 10 hours.
 
 ## Installation
 
