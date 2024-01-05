@@ -197,9 +197,14 @@ exports[`renders correctly with scrollable content 1`] = `
         <View
           style={
             {
+              "alignItems": "stretch",
+              "backgroundColor": "transparent",
+              "flexDirection": "column",
               "height": 900,
+              "justifyContent": "flex-start",
             }
           }
+          testID="test-view"
         >
           <Text
             style={

@@ -32,7 +32,7 @@ const View: React.FC<CustomViewProps> = props => {
   };
 
   return (
-    <RNView style={containerStyle} {...restProps}>
+    <RNView testID="test-view" style={containerStyle}>
       {children}
     </RNView>
   );

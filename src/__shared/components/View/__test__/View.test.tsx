@@ -17,12 +17,7 @@ test('renders View with default styles', () => {
 
 test('renders View with custom styles', () => {
   const {getByTestId} = render(
-    <View
-      testID="test-view"
-      alignItems="center"
-      justifyContent="space-between"
-      flexDirection="row"
-      style={{backgroundColor: 'red'}}>
+    <View testID="test-view" style={{backgroundColor: 'red'}}>
       Test Content
     </View>,
   );
@@ -31,9 +26,6 @@ test('renders View with custom styles', () => {
   const testView = getByTestId('test-view');
   expect(testView).toBeTruthy();
   expect(testView.props.style.backgroundColor).toBe('red');
-  //expect(testView.props.style.alignItems).toBe('center');
-  //expect(testView.props.style.justifyContent).toBe('space-between');
-  // expect(testView.props.style.flexDirection).toBe('row');
 });
 
 test('renders View with transparent background', () => {

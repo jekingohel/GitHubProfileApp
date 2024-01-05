@@ -4,13 +4,17 @@ exports[`renders Container with children 1`] = `
 <View
   style={
     {
+      "alignItems": "stretch",
       "backgroundColor": "#FFFFFF",
+      "flexDirection": "column",
+      "justifyContent": "flex-start",
       "paddingBottom": 20,
       "paddingLeft": 20,
       "paddingRight": 20,
       "paddingTop": 20,
     }
   }
+  testID="test-view"
 >
   <Text
     style={
@@ -33,13 +37,17 @@ exports[`renders Container with custom styles 1`] = `
 <View
   style={
     {
+      "alignItems": "stretch",
       "backgroundColor": "#FFFFFF",
+      "flexDirection": "column",
+      "justifyContent": "flex-start",
       "paddingBottom": 20,
       "paddingLeft": 20,
       "paddingRight": 20,
       "paddingTop": 20,
     }
   }
+  testID="test-view"
 >
   <Text
     style={
@@ -62,13 +70,17 @@ exports[`renders Container with default styles 1`] = `
 <View
   style={
     {
+      "alignItems": "stretch",
       "backgroundColor": "#FFFFFF",
+      "flexDirection": "column",
+      "justifyContent": "flex-start",
       "paddingBottom": 20,
       "paddingLeft": 20,
       "paddingRight": 20,
       "paddingTop": 20,
     }
   }
+  testID="test-view"
 >
   <Text
     style={
