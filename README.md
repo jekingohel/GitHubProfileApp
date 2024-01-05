@@ -69,6 +69,9 @@ This mobile application allows users to search for GitHub profiles by username, 
 - Test navigating backward through the app.
 - Ensure the expected views are displayed after navigation.
 
+## Total Hours Spent
+Total hours spent on completing this task: 10 hours
+
 ## Installation
 
 1. Clone the repository:
