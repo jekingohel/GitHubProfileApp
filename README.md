@@ -1,24 +1,96 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# GitHub Profile App
 
-# Getting Started
+This mobile application allows users to search for GitHub profiles by username, view user details, and navigate through followers and following lists. The app fetches GitHub user data using the [GitHub REST API](https://docs.github.com/en/rest).
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features
 
-## Step 1: Start the Metro Server
+### User Search
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- A search bar enables users to fetch GitHub user profiles by username.
+- If no user exists with the provided username, a "Not found" view is presented.
+- If the user exists, a view displays the user's:
+  - Avatar
+  - Username
+  - Name
+  - Description
+  - Follower count
+  - Following count
 
-To start Metro, run the following command from the _root_ of your React Native project:
+### Followers/Following Lists
+
+- Users can tap on the follower/following counts to navigate to a list view.
+- The list view displays the user's followers or the users they are following.
+- Tapping on a user in the list navigates to their profile view.
+
+### Navigation
+
+- Users can navigate backward through the navigation stack.
+
+### Skeleton Screens
+
+- Add skeleton screens to provide a visual indication of loading.
+
+### Pull to Refresh
+
+- Implement pull-to-refresh functionality to allow users to manually refresh data.
+
+### Profile Caching & Cache Invalidation
+
+- Implement profile caching to improve app performance.
+- Add cache invalidation mechanisms to keep data up-to-date.
+
+## Test Cases
+
+#### User Search
+
+- Verify the presence of the search bar.
+- Test searching for a user that exists.
+- Test searching for a user that doesn't exist.
+- Verify the "Not found" view is displayed appropriately.
+
+#### User Details
+
+- Ensure user details are displayed correctly.
+- Test navigating to a user's followers list.
+- Test navigating to a user's following list.
+- Verify the avatar, username, name, description, follower count, and following count.
+
+#### Followers/Following List
+
+- Test tapping on a follower/following count.
+- Verify the list view displays the correct user information.
+- Test tapping on a user in the list and verify navigation to their profile view.
+
+#### Navigation
+
+- Test navigating backward through the app.
+- Ensure the expected views are displayed after navigation.
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/jekingohel/GitHubProfileApp.git
+```
+
+2. Change into the project directory:
+
+```bash
+cd GitHubProfileApp
+```
+
+3. Install dependencies:
 
 ```bash
 # using npm
-npm start
+npm install
 
 # OR using Yarn
-yarn start
+yarn install
 ```
 
-## Step 2: Start your Application
+## Usage
 
 Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
 
@@ -46,34 +118,12 @@ If everything is set up _correctly_, you should see your new app running in your
 
 This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
+## Testing
 
-Now that you have successfully run the app, let's modify it.
+```bash
+# using npm
+npm test -- -u
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+# OR using Yarn
+yarn test -- -u
+```
