@@ -1,7 +1,11 @@
 import React from 'react';
-import {View as RNView, ViewStyle} from 'react-native';
+import {
+  View as RNView,
+  ViewStyle,
+  ViewProps as RNViewProps,
+} from 'react-native';
 
-interface CustomViewProps {
+interface CustomViewProps extends RNViewProps {
   transparent?: boolean;
   alignItems?: ViewStyle['alignItems'];
   justifyContent?: ViewStyle['justifyContent'];
@@ -16,6 +20,7 @@ const View: React.FC<CustomViewProps> = props => {
     alignItems = 'stretch',
     justifyContent = 'flex-start',
     flexDirection = 'column',
+    ...restProps
   } = props;
 
   const containerStyle: ViewStyle = {
@@ -26,7 +31,11 @@ const View: React.FC<CustomViewProps> = props => {
     ...props.style,
   };
 
-  return <RNView style={containerStyle}>{children}</RNView>;
+  return (
+    <RNView testID="test-view" style={containerStyle}>
+      {children}
+    </RNView>
+  );
 };
 
 export default View;

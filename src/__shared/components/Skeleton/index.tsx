@@ -1,12 +1,6 @@
 import React, {useEffect, useRef} from 'react';
-import {
-  View,
-  StyleSheet,
-  Animated,
-  Easing,
-  StyleProp,
-  ViewStyle,
-} from 'react-native';
+import {StyleSheet, Animated, Easing, StyleProp, ViewStyle} from 'react-native';
+import {act} from '@testing-library/react-native';
 
 interface SkeletonProps {
   type?: 'rectangle' | 'circle';
@@ -43,16 +37,20 @@ const Skeleton: React.FC<SkeletonProps> = ({
       ]),
     );
 
-    pulseAnimation.start();
+    act(() => {
+      pulseAnimation.start();
+    });
 
     return () => {
-      pulseAnimation.stop();
+      act(() => {
+        pulseAnimation.stop();
+      });
     };
   }, [animatedValue, duration]);
 
   const pulseInterpolation = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [0.6, 0.8], // Adjust the opacity range based on your preference
+    outputRange: [0.6, 0.8],
   });
 
   const borderRadius = type === 'circle' ? height / 2 : 4;
@@ -63,12 +61,14 @@ const Skeleton: React.FC<SkeletonProps> = ({
     style,
   ];
 
-  return <Animated.View style={skeletonStyles as ViewStyle} />;
+  return (
+    <Animated.View testID="skeleton" style={skeletonStyles as ViewStyle} />
+  );
 };
 
 const styles = StyleSheet.create({
   skeleton: {
-    backgroundColor: '#e0e0e0', // Placeholder color
+    backgroundColor: '#e0e0e0',
   },
 });
 

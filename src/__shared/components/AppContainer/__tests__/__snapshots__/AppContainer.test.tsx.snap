@@ -1,0 +1,256 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<RCTSafeAreaView
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    style={
+      [
+        {
+          "backgroundColor": "#FFFFFF",
+          "flex": 1,
+        },
+        {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <RCTScrollView
+      contentContainerStyle={
+        {
+          "flex": 1,
+        }
+      }
+      keyboardShouldPersistTaps="handled"
+      showsVerticalScrollIndicator={false}
+    >
+      <View>
+        <Text
+          style={
+            {
+              "color": "#000000",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "lineHeight": 18,
+              "textAlign": "left",
+            }
+          }
+        >
+          Test Content
+        </Text>
+      </View>
+    </RCTScrollView>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`renders correctly with a loader 1`] = `
+<RCTSafeAreaView
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    loader={true}
+    onLayout={[Function]}
+    style={
+      [
+        {
+          "backgroundColor": "#FFFFFF",
+          "flex": 1,
+        },
+        {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <RCTScrollView
+      contentContainerStyle={
+        {
+          "flex": 1,
+        }
+      }
+      keyboardShouldPersistTaps="handled"
+      loader={true}
+      showsVerticalScrollIndicator={false}
+    >
+      <View>
+        <Text
+          style={
+            {
+              "color": "#000000",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "lineHeight": 18,
+              "textAlign": "left",
+            }
+          }
+        >
+          Test Content
+        </Text>
+      </View>
+    </RCTScrollView>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`renders correctly with a specified status bar color 1`] = `
+<RCTSafeAreaView
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    statusBarColor="#ff0000"
+    style={
+      [
+        {
+          "backgroundColor": "#FFFFFF",
+          "flex": 1,
+        },
+        {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <RCTScrollView
+      contentContainerStyle={
+        {
+          "flex": 1,
+        }
+      }
+      keyboardShouldPersistTaps="handled"
+      showsVerticalScrollIndicator={false}
+      statusBarColor="#ff0000"
+    >
+      <View>
+        <Text
+          style={
+            {
+              "color": "#000000",
+              "fontSize": 12,
+              "fontStyle": "normal",
+              "fontWeight": "400",
+              "lineHeight": 18,
+              "textAlign": "left",
+            }
+          }
+        >
+          Test Content
+        </Text>
+      </View>
+    </RCTScrollView>
+  </View>
+</RCTSafeAreaView>
+`;
+
+exports[`renders correctly with scrollable content 1`] = `
+<RCTSafeAreaView
+  style={
+    {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    onLayout={[Function]}
+    scroll={true}
+    style={
+      [
+        {
+          "backgroundColor": "#FFFFFF",
+          "flex": 1,
+        },
+        {
+          "paddingBottom": 0,
+        },
+      ]
+    }
+  >
+    <RCTScrollView
+      contentContainerStyle={
+        {
+          "flex": 1,
+        }
+      }
+      keyboardShouldPersistTaps="handled"
+      scroll={true}
+      showsVerticalScrollIndicator={false}
+    >
+      <View>
+        <View
+          style={
+            {
+              "alignItems": "stretch",
+              "backgroundColor": "transparent",
+              "flexDirection": "column",
+              "height": 900,
+              "justifyContent": "flex-start",
+            }
+          }
+          testID="test-view"
+        >
+          <Text
+            style={
+              {
+                "color": "#000000",
+                "fontSize": 12,
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "lineHeight": 18,
+                "textAlign": "left",
+              }
+            }
+          >
+            Test Content
+          </Text>
+          <Text
+            style={
+              {
+                "color": "#000000",
+                "fontSize": 12,
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "lineHeight": 18,
+                "textAlign": "left",
+              }
+            }
+          >
+            Additional Content
+          </Text>
+          <Text
+            style={
+              {
+                "color": "#000000",
+                "fontSize": 12,
+                "fontStyle": "normal",
+                "fontWeight": "400",
+                "lineHeight": 18,
+                "textAlign": "left",
+              }
+            }
+          >
+            More Content
+          </Text>
+        </View>
+      </View>
+    </RCTScrollView>
+  </View>
+</RCTSafeAreaView>
+`;

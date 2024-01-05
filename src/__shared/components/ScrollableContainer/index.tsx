@@ -45,11 +45,16 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = props => {
 
   const handelOnScroll = (event: any) => {
     const {layoutMeasurement, contentOffset, contentSize} = event.nativeEvent;
-    const isEndReached =
-      layoutMeasurement.height + contentOffset.y + 2 >= contentSize.height;
 
-    contentOffset.y > 100 ? setScrollToTopBtn(true) : setScrollToTopBtn(false);
-    handelScroll(event, isEndReached);
+    if (layoutMeasurement) {
+      const isEndReached =
+        layoutMeasurement.height + contentOffset.y + 2 >= contentSize.height;
+
+      contentOffset.y > 100
+        ? setScrollToTopBtn(true)
+        : setScrollToTopBtn(false);
+      handelScroll(event, isEndReached);
+    }
   };
 
   useEffect(() => {
@@ -64,6 +69,7 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = props => {
   return (
     <>
       <Animated.ScrollView
+        testID="scroll-view"
         ref={scrollRef}
         keyboardShouldPersistTaps="handled"
         horizontal={horizontal}

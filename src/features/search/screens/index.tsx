@@ -26,9 +26,11 @@ function screens({navigation}: SectionProps): React.JSX.Element {
 
   const onSubmit = () => {
     setloading(true);
+
     if (inputVal) {
       Requests.GetUser(inputVal)
         .then(res => {
+          console.log(res);
           setloading(false);
           setUserFetched(true);
           setData(res);

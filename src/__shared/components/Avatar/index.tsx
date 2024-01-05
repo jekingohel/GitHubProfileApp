@@ -72,10 +72,12 @@ const Avatar: React.FC<AvatarProps> = props => {
     </Pressable>
   ) : (
     <Pressable
+      testID="avatar-pressable"
       {...props}
       disabled={!onPress && !fullView}
       style={[{position: 'relative'}]}>
       <Image
+        testID="avatar-image"
         {...imageProps}
         source={{uri: source}}
         style={[

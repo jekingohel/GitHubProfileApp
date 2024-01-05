@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders Avatar with a single letter correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  size="medium"
+  source={null}
+  style={
+    [
+      {
+        "alignItems": "center",
+        "backgroundColor": "rgba(142,142,147,.8)",
+        "borderRadius": 0,
+        "height": 38,
+        "justifyContent": "center",
+        "width": 38,
+      },
+      undefined,
+    ]
+  }
+  title="John Doe"
+>
+  <Text
+    style={
+      {
+        "alignSelf": "center",
+        "color": "#FFFFFF",
+        "fontSize": 17.27272727272727,
+        "fontStyle": "normal",
+        "fontWeight": "400",
+        "lineHeight": 41.8,
+        "textAlign": "left",
+      }
+    }
+  >
+    JD
+  </Text>
+</View>
+`;
+
+exports[`renders Avatar with an image correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  size="large"
+  source="https://dummyimage.com/100"
+  style={
+    [
+      {
+        "position": "relative",
+      },
+    ]
+  }
+  testID="avatar-pressable"
+  title="Test Case"
+>
+  <Image
+    source={
+      {
+        "uri": "https://dummyimage.com/100",
+      }
+    }
+    style={
+      [
+        {
+          "borderRadius": 0,
+          "height": 65,
+          "width": 65,
+        },
+        undefined,
+      ]
+    }
+    testID="avatar-image"
+  />
+</View>
+`;
+
+exports[`renders Avatar with custom size and color correctly 1`] = `
+<View
+  accessibilityState={
+    {
+      "busy": undefined,
+      "checked": undefined,
+      "disabled": false,
+      "expanded": undefined,
+      "selected": undefined,
+    }
+  }
+  accessibilityValue={
+    {
+      "max": undefined,
+      "min": undefined,
+      "now": undefined,
+      "text": undefined,
+    }
+  }
+  accessible={true}
+  backgroundColor="#ff0000"
+  collapsable={false}
+  customSize={10}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  size="medium"
+  source="https://dummyimage.com/100"
+  style={
+    [
+      {
+        "position": "relative",
+      },
+    ]
+  }
+  testID="avatar-pressable"
+  textColor="#ffffff"
+  title="Alice"
+>
+  <Image
+    source={
+      {
+        "uri": "https://dummyimage.com/100",
+      }
+    }
+    style={
+      [
+        {
+          "borderRadius": 0,
+          "height": 48,
+          "width": 48,
+        },
+        undefined,
+      ]
+    }
+    testID="avatar-image"
+  />
+</View>
+`;
