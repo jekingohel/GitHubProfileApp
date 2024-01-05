@@ -20,7 +20,6 @@ interface ScrollableContainerProps extends ScrollViewProps {
   scrollref?: React.RefObject<ScrollView>;
   scrollToTop?: boolean;
   scrollToTopPostion?: number;
-  containerStyle?: any;
 }
 
 const ScrollableContainer: React.FC<ScrollableContainerProps> = props => {
@@ -38,7 +37,6 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = props => {
     scrollref,
     scrollToTop,
     scrollToTopPostion,
-    containerStyle,
     ...restProps
   } = props;
 
@@ -79,12 +77,14 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = props => {
         showsVerticalScrollIndicator={!horizontal && scrollBar}
         style={[
           {
+            flex: 1,
             backgroundColor: backgroundColor,
             paddingVertical: 15,
           },
           wrapperStyle && wrapperStyle,
         ]}
         onScroll={onScroll ? onScroll : handelOnScroll}
+        // contentContainerStyle={{flex: 1}}
         {...restProps}>
         {props.children}
       </Animated.ScrollView>

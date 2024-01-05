@@ -15,6 +15,8 @@ const Search: React.FC<SearchProps> = ({navigation}) => {
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
+      title: 'Search',
+      headerBackTitle: 'Go back',
       headerTitle: () => (
         <Text
           fontSize={20}
