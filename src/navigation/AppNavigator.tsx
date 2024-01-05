@@ -4,15 +4,23 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import {FollowersFollowing, Search, UserProfile} from '../features';
 
+// Create separate stacks for UserList and UserProfile
 const Stack = createStackNavigator();
 const UserListStack = createStackNavigator();
 const UserProfileStack = createStackNavigator();
 
 interface InitialProps {
   navigation?: any;
-  route?: any; // Adjust the type based on your navigation configuration
+  route?: any;
 }
-
+/**
+ * UserListNavigator Component
+ *
+ * handles navigation for followers/following lists
+ *
+ * @component
+ * @returns {JSX.Element}
+ */
 const UserListNavigator: React.FC<InitialProps> = ({route}) => {
   return (
     <UserListStack.Navigator
@@ -33,6 +41,15 @@ const UserListNavigator: React.FC<InitialProps> = ({route}) => {
     </UserListStack.Navigator>
   );
 };
+
+/**
+ * UserProfileNavigator Component
+ *
+ * handles navigation for user profiles
+ *
+ * @component
+ * @returns {JSX.Element}
+ */
 
 const UserProfileNavigator: React.FC<InitialProps> = ({route}) => {
   return (
@@ -55,6 +72,14 @@ const UserProfileNavigator: React.FC<InitialProps> = ({route}) => {
   );
 };
 
+/**
+ * AppNavigator Component
+ *
+ * The main navigation container for the entire app.
+ *
+ * @component
+ * @returns {JSX.Element} - React element representing the main navigation container.
+ */
 function AppNavigator(): React.JSX.Element {
   return (
     <NavigationContainer>

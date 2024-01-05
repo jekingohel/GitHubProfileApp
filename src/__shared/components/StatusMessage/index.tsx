@@ -2,11 +2,21 @@ import React, {PropsWithChildren} from 'react';
 
 import {Text, View} from '../';
 
+// Define the type of properties that StatusMessage component accepts
 type propsType = PropsWithChildren<{
   title?: string | undefined;
   description: string | undefined;
 }>;
 
+/**
+ * JSX Component for rendering a status message with an optional title and description.
+ * @param {object} props - Properties for configuring the StatusMessage component.
+ * @param {string | undefined} [props.title] - Optional title for the status message.
+ * @param {string | undefined} props.description - Description for the status message.
+ * @returns {JSX.Element} - StatusMessage component.
+ * @example
+ * <StatusMessage title="Success" description="Operation completed successfully." />
+ */
 function StatusMessage({
   title = undefined,
   description = undefined,

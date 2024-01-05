@@ -9,6 +9,22 @@ type propsType = PropsWithChildren<{
   style?: object;
 }>;
 
+/**
+ * Functional component for an action button with a title and optional subtitle.
+ * @param {object} props - Component properties.
+ * @param {string} props.subTitle - Optional subtitle text.
+ * @param {() => void} props.onPress - Callback function for the button press event.
+ * @param {string} props.title - Title text for the button.
+ * @param {object} props.style - Additional styles for the button.
+ * @returns {JSX.Element} - Action button component.
+ * @example
+ * <ActionBtn
+ *   subTitle="followers"
+ *   onPress={() => handlePress()}
+ *   title="123"
+ *   style={{ marginTop: 10 }}
+ * />
+ */
 function ActionBtn({
   subTitle,
   onPress,

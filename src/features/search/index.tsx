@@ -1,17 +1,20 @@
 import React, {useEffect} from 'react';
-import {BackHandler, Alert, Dimensions, Image} from 'react-native';
+import {BackHandler, Alert, Image} from 'react-native';
 import Screens from './screens'; // Add the correct import for Screens component
 import Text from '../../__shared/components/Text';
 
-/// *** Device Dimensions
-const {width} = Dimensions.get('window');
-
 interface SearchProps {
   navigation: any;
-  route: any; // Adjust the type based on your navigation configuration
+  route: any;
 }
 
+/**
+ * Search component for displaying and searching users.
+ * @param {SearchProps} props - The properties object.
+ * @returns {JSX.Element} - Rendered component.
+ */
 const Search: React.FC<SearchProps> = ({navigation}) => {
+  // Set navigation options for the screen
   useEffect(() => {
     navigation.setOptions({
       headerShown: true,
@@ -33,14 +36,15 @@ const Search: React.FC<SearchProps> = ({navigation}) => {
           resizeMode="contain"
         />
       ),
-      headerRight: () => null,
-      headerShadowVisible: false,
+      headerRight: () => null, // No header right component
+      headerShadowVisible: false, // Disable header shadow
     });
 
-    // BackHandler
+    // BackHandler setup
     const backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       () => {
+        // Show confirmation alert on back press
         Alert.alert('Hold on!', 'Are you sure you want to go back?', [
           {
             text: 'Cancel',
@@ -49,13 +53,13 @@ const Search: React.FC<SearchProps> = ({navigation}) => {
           },
           {text: 'YES', onPress: () => BackHandler.exitApp()},
         ]);
-        return true;
+        return true; // Prevent default behavior
       },
     );
-
+    // Cleanup event listener on component unmount
     return () => backHandler.remove();
   }, [navigation]);
-
+  // Render the Screens component with the navigation prop
   return <Screens navigation={navigation} />;
 };
 

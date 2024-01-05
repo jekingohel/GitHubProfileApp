@@ -70,7 +70,7 @@ This mobile application allows users to search for GitHub profiles by username, 
 - Ensure the expected views are displayed after navigation.
 
 ## Time Investment
-The completion of this project required a thoughtful investment of time. The total hours dedicated to the development, testing, and refinement of the GitHub Profile App amounted to 10 hours.
+The completion of this project required a thoughtful investment of time. The total hours dedicated to the development, testing, and refinement of the GitHub Profile App amounted to 16 hours.
 
 ## Installation
 

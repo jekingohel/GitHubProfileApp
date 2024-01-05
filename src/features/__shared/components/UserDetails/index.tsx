@@ -22,15 +22,35 @@ type propsType = PropsWithChildren<{
   onPress?: () => void;
 }>;
 
+/**
+ * JSX Component representing user details.
+ * @component
+ *
+ * @param {propsType} props - The component props.
+ * @param {UserDetailTypes} props.data - User details data.
+ * @param {any} props.navigation - Navigation object.
+ * @param {boolean} props.refreshing - Indicates if data is refreshing.
+ * @param {() => void} props.onRefresh - Callback for refresh action.
+ * @param {() => void} props.onPress - Callback for press action.
+ *
+ * @returns {React.JSX.Element} JSX element representing user details.
+ */
+
 function UserDetails({
   data = undefined,
   navigation,
   refreshing = false,
   onRefresh = () => {},
 }: propsType): React.JSX.Element {
+  // Extract followers and following counts from user data
   const followers = data?.followers || 0;
   const following = data?.following || 0;
 
+  /**
+   * Navigate to Followers or Following screen based on type.
+   * @param {string} type - Type of navigation ('followers' or 'following').
+   * @returns {void}
+   */
   const viewFollowersFollowing = (type: string) => {
     const userparams = {type: type, login: data?.login};
     if (type === 'followers') {
@@ -40,13 +60,16 @@ function UserDetails({
     }
   };
   return (
+    // Scrollable container with refresh functionality
     <ScrollableContainer
       refresh
       contentInsetAdjustmentBehavior="automatic"
       refreshing={refreshing}
       onRefresh={onRefresh}>
       <Container>
+        {/* Container for user details */}
         <View transparent style={styles.container}>
+          {/* Avatar and user details */}
           <View transparent style={styles.avatarContainer}>
             <Avatar
               source={data?.avatar_url || null}
@@ -72,6 +95,8 @@ function UserDetails({
               </Text>
             </View>
           </View>
+
+          {/* User bio, email, location, and company */}
           {data?.bio && (
             <Text fontSize={16} lineHeight={24} color="rgb(31,35,40)">
               {data?.bio}
@@ -107,6 +132,8 @@ function UserDetails({
               color="rgb(31,35,40)"
             />
           )}
+
+          {/* Followers and following counts with icons */}
           <View
             style={{
               flexDirection: 'row',
@@ -139,6 +166,7 @@ function UserDetails({
   );
 }
 
+// Styles for the UserDetails component
 const styles = StyleSheet.create({
   container: {
     flex: 1,

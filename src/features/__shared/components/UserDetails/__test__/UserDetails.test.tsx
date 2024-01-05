@@ -1,9 +1,10 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react-native';
 import UserDetails from '..';
-import FormatNumber from '../../../../../__shared/utils/FormatNumber';
 
-const mockData = {
+import {UserDetails as UserDetailTypes} from '../../../../../store/types/UserDetails.types';
+
+const mockData: UserDetailTypes = {
   avatar_url: 'https://dummyimage.com/100',
   name: 'John Doe',
   login: 'johndoe',
