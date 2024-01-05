@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders search bar components 1`] = `
+<View
+  style={
+    {
+      "alignItems": "center",
+      "backgroundColor": "transparent",
+      "borderBottomColor": "#F4F4F4",
+      "borderBottomWidth": 1,
+      "columnGap": 15,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+      "padding": 10,
+    }
+  }
+  testID="test-view"
+>
+  <TextInput
+    autoCapitalize="none"
+    clearButtonMode="always"
+    editable={true}
+    placeholder="Search User"
+    style={
+      {
+        "backgroundColor": "#f4f4f4",
+        "borderRadius": 10,
+        "borderWidth": 0,
+        "flexGrow": 1,
+        "flexShrink": 1,
+        "fontSize": 15,
+        "padding": 10,
+      }
+    }
+    testID="search-input"
+  />
+  <View
+    accessibilityState={
+      {
+        "busy": undefined,
+        "checked": undefined,
+        "disabled": undefined,
+        "expanded": undefined,
+        "selected": undefined,
+      }
+    }
+    accessibilityValue={
+      {
+        "max": undefined,
+        "min": undefined,
+        "now": undefined,
+        "text": undefined,
+      }
+    }
+    accessible={true}
+    collapsable={false}
+    focusable={false}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      {
+        "opacity": 1,
+      }
+    }
+    testID="submit-button"
+  >
+    <Text
+      style={
+        {
+          "color": "#3399ff",
+          "fontSize": 18,
+          "fontStyle": "normal",
+          "fontWeight": "400",
+          "lineHeight": 30,
+          "textAlign": "left",
+        }
+      }
+    >
+      Submit
+    </Text>
+  </View>
+</View>
+`;

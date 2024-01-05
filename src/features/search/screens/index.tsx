@@ -1,13 +1,12 @@
 import React, {PropsWithChildren, useRef, useState} from 'react';
 import {
   AppContainer,
-  Text,
-  View,
   StatusMessage,
+  SearchBar,
 } from '../../../__shared/components';
 import UserDetailsSkeleton from '../../__shared/components/UserDetails/skeleton';
 import UserDetails from '../../__shared/components/UserDetails';
-import {TextInput, TouchableOpacity} from 'react-native';
+import {TextInput} from 'react-native';
 import Requests from '../../../requests';
 import store from '../../../store';
 import {UsersAddUser, UsersUpdateUser} from '../../../store/actions';
@@ -80,45 +79,14 @@ function screens({navigation}: SectionProps): React.JSX.Element {
 
   return (
     <AppContainer scroll={false}>
-      <View
-        transparent
-        flexDirection="row"
-        alignItems="center"
-        justifyContent="space-between"
-        style={{
-          padding: 10,
-          columnGap: 15,
-          borderBottomWidth: 1,
-          borderBottomColor: '#F4F4F4',
-        }}>
-        <TextInput
-          ref={inputRef}
-          editable
-          autoCapitalize="none"
-          clearButtonMode="always"
-          style={{
-            backgroundColor: '#f4f4f4',
-            fontSize: 15,
-            borderWidth: 0,
-            flexShrink: 1,
-            flexGrow: 1,
-            padding: 10,
-            borderRadius: 10,
-          }}
-          onChangeText={handleOnChange}
-          placeholder="Search User"
-        />
-        <TouchableOpacity
-          activeOpacity={0.5}
-          onPress={() => {
-            setloading(true);
-            onSubmit(false);
-          }}>
-          <Text fontSize={18} lineHeight={30} color="#3399ff">
-            Submit
-          </Text>
-        </TouchableOpacity>
-      </View>
+      <SearchBar
+        handleOnChange={handleOnChange}
+        onSubmit={() => {
+          setloading(true);
+          onSubmit(false);
+        }}
+        inputRef={inputRef}
+      />
       {loading && <UserDetailsSkeleton />}
       {!loading && isUserFetched && data && (
         <UserDetails

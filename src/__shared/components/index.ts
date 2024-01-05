@@ -8,3 +8,4 @@ export {default as Avatar} from './Avatar';
 export {default as TextWithIcon} from './TextWithIcon';
 export {default as StatusMessage} from './StatusMessage';
 export {default as ActionButton} from './ActionButton';
+export {default as SearchBar} from './SearchBar';
