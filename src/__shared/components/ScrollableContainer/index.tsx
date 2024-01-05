@@ -1,6 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Animated,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
   RefreshControl,
   ScrollView,
   ScrollViewProps,
@@ -10,12 +12,12 @@ interface ScrollableContainerProps extends ScrollViewProps {
   backgroundColor?: string;
   horizontal?: boolean;
   scrollBar?: boolean;
-  wrapperStyle?: any;
+  wrapperStyle?: object;
   refresh?: boolean;
   refreshing?: boolean;
   scrollLoader?: boolean;
   onRefresh?: () => void;
-  handelScroll?: (event: any, isEndReached: boolean) => void;
+  handelScroll?: (event: object, isEndReached: boolean) => void;
   onScroll?: ScrollViewProps['onScroll'];
   scrollref?: React.RefObject<ScrollView>;
   scrollToTop?: boolean;
@@ -43,7 +45,7 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = props => {
   const scrollRef = scrollref || useRef<ScrollView>(null);
   const [scrollToTopBtn, setScrollToTopBtn] = useState(false);
 
-  const handelOnScroll = (event: any) => {
+  const handelOnScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const {layoutMeasurement, contentOffset, contentSize} = event.nativeEvent;
 
     if (layoutMeasurement) {
@@ -67,38 +69,38 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = props => {
   }, [scrollToTop, scrollToTopPostion]);
 
   return (
-    <>
-      <Animated.ScrollView
-        testID="scroll-view"
-        ref={scrollRef}
-        keyboardShouldPersistTaps="handled"
-        horizontal={horizontal}
-        showsHorizontalScrollIndicator={horizontal && scrollBar}
-        showsVerticalScrollIndicator={!horizontal && scrollBar}
-        style={[
-          {
-            flex: 1,
-            backgroundColor: backgroundColor,
-            paddingVertical: 15,
-          },
-          wrapperStyle && wrapperStyle,
-        ]}
-        onScroll={onScroll ? onScroll : handelOnScroll}
-        // contentContainerStyle={{flex: 1}}
-        {...restProps}>
-        {props.children}
-      </Animated.ScrollView>
-      {refresh && (
-        <RefreshControl
-          progressBackgroundColor={'#FFFFFF'}
-          colors={['black']}
-          tintColor={'black'}
-          titleColor={'black'}
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-        />
-      )}
-    </>
+    <Animated.ScrollView
+      testID="scroll-view"
+      ref={scrollRef}
+      keyboardShouldPersistTaps="handled"
+      horizontal={horizontal}
+      showsHorizontalScrollIndicator={horizontal && scrollBar}
+      showsVerticalScrollIndicator={!horizontal && scrollBar}
+      style={[
+        {
+          flex: 1,
+          backgroundColor: backgroundColor,
+          paddingVertical: 15,
+        },
+        wrapperStyle && wrapperStyle,
+      ]}
+      refreshControl={
+        refresh ? (
+          <RefreshControl
+            progressBackgroundColor={'#FFFFFF'}
+            colors={['black']}
+            tintColor={'black'}
+            titleColor={'black'}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        ) : undefined
+      }
+      onScroll={onScroll ? onScroll : handelOnScroll}
+      // contentContainerStyle={{flex: 1}}
+      {...restProps}>
+      {props.children}
+    </Animated.ScrollView>
   );
 };
 

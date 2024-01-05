@@ -9,6 +9,9 @@ import UserDetailsSkeleton from '../../__shared/components/UserDetails/skeleton'
 import UserDetails from '../../__shared/components/UserDetails';
 import {TextInput, TouchableOpacity} from 'react-native';
 import Requests from '../../../requests';
+import store from '../../../store';
+import {UsersAddUser, UsersUpdateUser} from '../../../store/actions';
+import {UserDetails as UserDetailTypes} from '../../../store/types/UserDetails.types';
 
 type SectionProps = PropsWithChildren<{
   navigation: any;
@@ -19,35 +22,54 @@ function screens({navigation}: SectionProps): React.JSX.Element {
   const [loading, setloading] = useState<boolean>(false);
   const [refreshing, setRefreshing] = useState<boolean>(false);
   const [data, setData] = useState<any>(null);
+  const [inputVal, setInputVal] = useState('');
 
   const inputRef = useRef<TextInput>(null);
-  const [inputVal, setInputVal] = useState('');
   const [isUserFetched, setUserFetched] = useState<boolean>(false);
 
-  const onSubmit = () => {
-    setloading(true);
-
+  const onSubmit = (refresh: boolean) => {
+    const users = store.getState().Users.collection;
+    const oldUsers = Object.keys(users)?.includes(inputVal);
     if (inputVal) {
-      Requests.GetUser(inputVal)
-        .then(res => {
-          setloading(false);
-          setUserFetched(true);
-          setData(res);
-        })
-        .catch(err => {
-          setloading(false);
-          setData(null);
-          setUserFetched(true);
-        });
+      if (!oldUsers || refresh) {
+        Requests.GetUser(inputVal)
+          .then(res => {
+            if (res) {
+              const result: UserDetailTypes = {
+                ...(res as UserDetailTypes),
+                followers_list: [],
+                following_list: [],
+              };
+              setloading(false);
+              setRefreshing(false);
+              setUserFetched(true);
+              setData(result);
+              store.dispatch(UsersAddUser(result as UserDetailTypes));
+              store.dispatch(UsersUpdateUser(result as UserDetailTypes));
+            }
+          })
+          .catch(err => {
+            setloading(false);
+            setRefreshing(false);
+            setData(null);
+            setUserFetched(true);
+          });
+      } else {
+        setloading(false);
+        setRefreshing(false);
+        setUserFetched(true);
+        setData(users[inputVal]);
+      }
     } else {
       setloading(false);
+      setRefreshing(false);
       setData(null);
     }
   };
 
   const onRefresh = () => {
     setRefreshing(true);
-    onSubmit();
+    onSubmit(true);
   };
 
   const handleOnChange = (val: string) => {
@@ -86,7 +108,12 @@ function screens({navigation}: SectionProps): React.JSX.Element {
           onChangeText={handleOnChange}
           placeholder="Search User"
         />
-        <TouchableOpacity activeOpacity={0.5} onPress={onSubmit}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => {
+            setloading(true);
+            onSubmit(false);
+          }}>
           <Text fontSize={18} lineHeight={30} color="#3399ff">
             Submit
           </Text>
@@ -94,7 +121,12 @@ function screens({navigation}: SectionProps): React.JSX.Element {
       </View>
       {loading && <UserDetailsSkeleton />}
       {!loading && isUserFetched && data && (
-        <UserDetails data={data} navigation={navigation} />
+        <UserDetails
+          data={data}
+          navigation={navigation}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />
       )}
       {!loading && isUserFetched && data === null && inputVal !== '' && (
         <StatusMessage

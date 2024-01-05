@@ -4,9 +4,9 @@ import {Text} from '..';
 
 type propsType = PropsWithChildren<{
   subTitle?: string;
-  onPress?: (arg: any) => any;
+  onPress?: () => void;
   title?: string;
-  style?: any;
+  style?: object;
 }>;
 
 function ActionBtn({

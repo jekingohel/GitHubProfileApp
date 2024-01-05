@@ -1,5 +1,7 @@
+import store from '../../../store';
 import Requests from '../../../requests';
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
+import {UsersSetFollowers, UsersSetFollowing} from '../../../store/actions';
 
 interface UseItemProps {
   type?: 'followers' | 'following';
@@ -7,35 +9,61 @@ interface UseItemProps {
 }
 
 interface UseItemResult {
-  data?: any; // Change the type to the actual type of your data
   loading: boolean;
+  refreshing?: boolean;
+  onRefresh?: () => void;
 }
 
 const useItem = ({type, login}: UseItemProps): UseItemResult => {
-  const [data, setData] = useState<any>(); // Change the type to the actual type of your data
   const [loading, setloading] = useState<boolean>(true);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
 
-  useEffect(() => {
-    const fetchItem = async () => {
+  const fetchItem = useCallback(
+    async (refresh: boolean) => {
+      const users = store.getState().Users.collection;
+      const followers_list = users[login]?.followers_list;
+      const following_list = users[login]?.following_list;
+      const oldFollowers = followers_list?.length !== 0;
+      const oldFollowing = following_list?.length !== 0;
+
       try {
-        let result;
-        if (type === 'followers') {
-          result = await Requests.GetFollowers(login);
-        } else {
-          result = await Requests.GetFollowing(login);
+        if (!oldFollowers || refresh) {
+          if (type === 'followers') {
+            let result = await Requests.GetFollowers(login);
+            result &&
+              store.dispatch(UsersSetFollowers(login as string, result as []));
+          }
         }
+
+        if (!oldFollowing || refresh) {
+          if (type === 'following') {
+            let result = await Requests.GetFollowing(login);
+            result &&
+              store.dispatch(UsersSetFollowing(login as string, result as []));
+          }
+        }
+
         setloading(false);
-        setData(result);
+        setRefreshing(false);
       } catch (err) {
         setloading(false);
+        setRefreshing(false);
         console.error(err);
       }
-    };
+    },
+    [type, login],
+  );
 
-    fetchItem();
-  }, [type, login]);
+  const onRefresh = () => {
+    setRefreshing(true);
+    fetchItem(true);
+  };
 
-  return {data, loading};
+  useEffect(() => {
+    fetchItem(false);
+  }, [fetchItem]);
+
+  return {loading, refreshing, onRefresh};
 };
 
 export default useItem;
