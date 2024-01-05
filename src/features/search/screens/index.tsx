@@ -34,6 +34,7 @@ function screens({navigation}: SectionProps): React.JSX.Element {
           setData(res);
         })
         .catch(err => {
+          console.log(err);
           setloading(false);
           setData(null);
           setUserFetched(true);

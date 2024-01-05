@@ -5,51 +5,53 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {FollowersFollowing, Search, UserProfile} from '../features';
 
 const Stack = createStackNavigator();
-const FollowersFollowingStack = createStackNavigator();
-const ProfileStack = createStackNavigator();
+const UserListStack = createStackNavigator();
+const UserProfileStack = createStackNavigator();
 
-interface intialProps {
+interface InitialProps {
   navigation?: any;
   route?: any; // Adjust the type based on your navigation configuration
 }
 
-const FollowersFollowingNavigator: React.FC<intialProps> = ({route}) => {
+const UserListNavigator: React.FC<InitialProps> = ({route}) => {
   return (
-    <FollowersFollowingStack.Navigator
-      initialRouteName="FollowersFollowing Screen"
+    <UserListStack.Navigator
+      initialRouteName="UserListScreen"
       screenOptions={{headerShown: false}}>
-      <FollowersFollowingStack.Screen
-        name="FollowersFollowing Screen"
-        component={FollowersFollowing}
-        initialParams={route?.params}
-      />
-      <FollowersFollowingStack.Group>
-        <FollowersFollowingStack.Screen
-          name="UserProfile"
-          component={UserProfile}
+      <UserListStack.Group>
+        <UserListStack.Screen
+          name="UserListScreen"
+          component={FollowersFollowing}
+          initialParams={route?.params}
         />
-      </FollowersFollowingStack.Group>
-    </FollowersFollowingStack.Navigator>
+        <UserListStack.Screen
+          name="UserProfileScreen"
+          component={UserProfileNavigator}
+          initialParams={route?.params}
+        />
+      </UserListStack.Group>
+    </UserListStack.Navigator>
   );
 };
 
-const ProfileNavigator: React.FC<intialProps> = ({route}) => {
+const UserProfileNavigator: React.FC<InitialProps> = ({route}) => {
   return (
-    <ProfileStack.Navigator
-      initialRouteName="UserProfile Screen"
+    <UserProfileStack.Navigator
+      initialRouteName="UserProfile"
       screenOptions={{headerShown: false}}>
-      <ProfileStack.Screen
-        name="UserProfile Screen"
-        component={FollowersFollowing}
-        initialParams={route?.params}
-      />
-      <ProfileStack.Group>
-        <ProfileStack.Screen
-          name="FollowersFollowing Screen"
+      <UserProfileStack.Group>
+        <UserProfileStack.Screen
+          name="UserProfile"
           component={UserProfile}
+          initialParams={route?.params}
         />
-      </ProfileStack.Group>
-    </ProfileStack.Navigator>
+        <UserProfileStack.Screen
+          name="UserList"
+          component={UserListNavigator}
+          initialParams={route?.params}
+        />
+      </UserProfileStack.Group>
+    </UserProfileStack.Navigator>
   );
 };
 
@@ -61,11 +63,7 @@ function AppNavigator(): React.JSX.Element {
         screenOptions={{headerShown: false}}>
         <Stack.Group>
           <Stack.Screen name="Search" component={Search} />
-          <Stack.Screen name="UserProfile" component={ProfileNavigator} />
-          <Stack.Screen
-            name="FollowersFollowing"
-            component={FollowersFollowingNavigator}
-          />
+          <Stack.Screen name="UserList" component={UserListNavigator} />
         </Stack.Group>
       </Stack.Navigator>
     </NavigationContainer>

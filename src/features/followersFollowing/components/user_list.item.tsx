@@ -9,7 +9,7 @@ type propsType = PropsWithChildren<{
 
 function UserItem({data = null, navigation}: propsType): React.JSX.Element {
   const viewUserDetails = () => {
-    navigation.navigate('UserProfile', {login: data?.login});
+    navigation.navigate('UserProfileScreen', {login: data?.login});
   };
   return (
     <TouchableOpacity

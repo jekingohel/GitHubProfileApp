@@ -24,9 +24,9 @@ function UserDetails({
   const viewFollowersFollowing = (type: string) => {
     const userparams = {type: type, login: data?.login};
     if (type === 'followers') {
-      navigation.navigate('FollowersFollowing', userparams);
+      navigation.navigate('UserList', userparams);
     } else {
-      navigation.navigate('FollowersFollowing', userparams);
+      navigation.navigate('UserList', userparams);
     }
   };
   return (
