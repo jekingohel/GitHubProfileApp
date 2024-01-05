@@ -29,7 +29,7 @@ const Search: React.FC<SearchProps> = ({navigation}) => {
       headerLeft: () => (
         <Image
           source={require('../../images/logo-github.png')}
-          style={{width: 22, height: 22, marginLeft: 15}}
+          style={{width: 32, height: 32, marginLeft: 15}}
           resizeMode="contain"
         />
       ),

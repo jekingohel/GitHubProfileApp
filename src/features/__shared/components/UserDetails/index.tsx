@@ -12,12 +12,14 @@ import {
 } from '../../../../__shared/components';
 
 import FormatNumber from '../../../../__shared/utils/FormatNumber';
+import {UserDetails as UserDetailTypes} from '../../../../store/types/UserDetails.types';
 
 type propsType = PropsWithChildren<{
-  data: any | undefined;
+  data?: UserDetailTypes;
   navigation?: any;
   refreshing?: boolean;
   onRefresh?: () => void;
+  onPress?: () => void;
 }>;
 
 function UserDetails({
@@ -26,6 +28,9 @@ function UserDetails({
   refreshing = false,
   onRefresh = () => {},
 }: propsType): React.JSX.Element {
+  const followers = data?.followers || 0;
+  const following = data?.following || 0;
+
   const viewFollowersFollowing = (type: string) => {
     const userparams = {type: type, login: data?.login};
     if (type === 'followers') {
@@ -44,10 +49,10 @@ function UserDetails({
         <View transparent style={styles.container}>
           <View transparent style={styles.avatarContainer}>
             <Avatar
-              source={data?.avatar_url}
+              source={data?.avatar_url || null}
               customSize={5}
               rounded
-              title={data?.name}
+              title={data?.name || ''}
               size="large"
             />
             <View transparent>
@@ -114,17 +119,17 @@ function UserDetails({
               resizeMode="contain"
             />
             <ActionButton
-              title={FormatNumber(data?.followers)}
+              title={FormatNumber(followers)}
               subTitle="followers"
               onPress={() =>
-                data?.followers > 0 && viewFollowersFollowing('followers')
+                followers > 0 && viewFollowersFollowing('followers')
               }
             />
             <ActionButton
-              title={FormatNumber(data?.following)}
+              title={FormatNumber(following)}
               subTitle="following"
               onPress={() =>
-                data?.following > 0 && viewFollowersFollowing('following')
+                following > 0 && viewFollowersFollowing('following')
               }
             />
           </View>

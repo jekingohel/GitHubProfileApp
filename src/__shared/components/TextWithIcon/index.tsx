@@ -18,13 +18,13 @@ type FontWeight =
   | undefined;
 
 type propsType = PropsWithChildren<{
-  iconSource?: any | undefined;
-  text?: any;
+  iconSource?: null | undefined;
+  text?: string | undefined;
   fontSize?: number;
   lineHeight?: number;
   color?: string;
   fontWeight?: FontWeight;
-  imageSize?: any;
+  imageSize?: [number, number | undefined];
 }>;
 
 function TextWithIcon({

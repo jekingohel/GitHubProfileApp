@@ -1,4 +1,4 @@
-import * as actionType from 'store/actions/actionTypes';
+import * as actionType from './actionTypes';
 
 // ----------------------------------------------------------------------------------------------------
 // Users
@@ -24,16 +24,16 @@ export const UsersUpdateUser = (user: object) => {
   };
 };
 
-export const UsersSetFollowers = (collection: any) => {
+export const UsersSetFollowers = (login: string, collection: any) => {
   return {
     type: actionType.ACTION_USERS_SET_FOLLOWERS,
-    payload: collection,
+    payload: {login, collection},
   };
 };
 
-export const UsersSetFollowing = (collection: any) => {
+export const UsersSetFollowing = (login: string, collection: any) => {
   return {
     type: actionType.ACTION_USERS_SET_FOLLOWING,
-    payload: collection,
+    payload: {login, collection},
   };
 };

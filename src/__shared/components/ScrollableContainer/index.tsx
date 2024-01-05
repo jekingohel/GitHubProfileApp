@@ -1,6 +1,8 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
   Animated,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
   RefreshControl,
   ScrollView,
   ScrollViewProps,
@@ -10,12 +12,12 @@ interface ScrollableContainerProps extends ScrollViewProps {
   backgroundColor?: string;
   horizontal?: boolean;
   scrollBar?: boolean;
-  wrapperStyle?: any;
+  wrapperStyle?: object;
   refresh?: boolean;
   refreshing?: boolean;
   scrollLoader?: boolean;
   onRefresh?: () => void;
-  handelScroll?: (event: any, isEndReached: boolean) => void;
+  handelScroll?: (event: object, isEndReached: boolean) => void;
   onScroll?: ScrollViewProps['onScroll'];
   scrollref?: React.RefObject<ScrollView>;
   scrollToTop?: boolean;
@@ -43,7 +45,7 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = props => {
   const scrollRef = scrollref || useRef<ScrollView>(null);
   const [scrollToTopBtn, setScrollToTopBtn] = useState(false);
 
-  const handelOnScroll = (event: any) => {
+  const handelOnScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
     const {layoutMeasurement, contentOffset, contentSize} = event.nativeEvent;
 
     if (layoutMeasurement) {

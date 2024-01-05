@@ -3,6 +3,7 @@ import {AppContainer} from '../../../__shared/components';
 import UserDetailsSkeleton from '../../__shared/components/UserDetails/skeleton';
 import UserDetails from '../../__shared/components/UserDetails';
 import useItem from '../utils/useItem';
+import {useSelector} from 'react-redux';
 
 type SectionProps = PropsWithChildren<{
   navigation: any;
@@ -10,7 +11,8 @@ type SectionProps = PropsWithChildren<{
 }>;
 
 function screens({navigation, params}: SectionProps): React.JSX.Element {
-  const {data, loading, refreshing, onRefresh} = useItem(params);
+  const {loading, refreshing, onRefresh} = useItem(params);
+  const {collection} = useSelector((state: any) => state.Users);
 
   return (
     <AppContainer scroll={false}>
@@ -18,7 +20,7 @@ function screens({navigation, params}: SectionProps): React.JSX.Element {
         <UserDetailsSkeleton />
       ) : (
         <UserDetails
-          data={data}
+          data={collection[params?.login]}
           navigation={navigation}
           refreshing={refreshing}
           onRefresh={onRefresh}

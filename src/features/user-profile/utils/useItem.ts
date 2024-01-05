@@ -1,46 +1,64 @@
+import store from '../../../store';
 import Requests from '../../../requests';
 import {useCallback, useEffect, useState} from 'react';
+import {UsersAddUser, UsersUpdateUser} from '../../../store/actions';
+import {UserDetails as UserDetailTypes} from '../../../store/types/UserDetails.types';
 
 interface UseItemProps {
   login: string;
 }
 
 interface UseItemResult {
-  data?: any; // Change the type to the actual type of your data
   loading: boolean;
   refreshing?: boolean;
   onRefresh?: () => void;
 }
 
 const useItem = ({login}: UseItemProps): UseItemResult => {
-  const [data, setData] = useState<any>(); // Change the type to the actual type of your data
   const [loading, setloading] = useState<boolean>(true);
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
-  const fetchItem = useCallback(async () => {
-    try {
-      let result;
-      result = await Requests.GetUser(login);
-      setloading(false);
-      setRefreshing(false);
-      setData(result);
-    } catch (err) {
-      setloading(false);
-      setRefreshing(false);
-      console.error(err);
-    }
-  }, [login]);
+  const fetchItem = useCallback(
+    async (refresh: boolean) => {
+      const users = store.getState().Users.collection;
+      const oldUsers = Object.keys(users)?.includes(login);
+      if (!oldUsers || refresh) {
+        try {
+          let result = await Requests.GetUser(login);
+          if (result) {
+            const data: UserDetailTypes = {
+              ...(result as UserDetailTypes),
+              followers_list: [] as never[],
+              following_list: [] as never[],
+            };
+            setloading(false);
+            setRefreshing(false);
+            store.dispatch(UsersAddUser(data as UserDetailTypes));
+            store.dispatch(UsersUpdateUser(data as UserDetailTypes));
+          }
+        } catch (err) {
+          setloading(false);
+          setRefreshing(false);
+          console.error(err);
+        }
+      } else {
+        setloading(false);
+        setRefreshing(false);
+      }
+    },
+    [login],
+  );
 
   const onRefresh = () => {
     setRefreshing(true);
-    fetchItem();
+    fetchItem(true);
   };
 
   useEffect(() => {
-    fetchItem();
+    fetchItem(false);
   }, [fetchItem]);
 
-  return {data, loading, refreshing, onRefresh};
+  return {loading, refreshing, onRefresh};
 };
 
 export default useItem;
