@@ -1,7 +1,7 @@
 import React, {PropsWithChildren, useRef, useState} from 'react';
 import {AppContainer} from '../../../__shared/components';
-import Skeleton from '../components/user-details.skeleton';
-import UserDetails from '../components/user-details';
+import UserDetailsSkeleton from '../../__shared/components/UserDetails/skeleton';
+import UserDetails from '../../__shared/components/UserDetails';
 import useItem from '../utils/useItem';
 
 type SectionProps = PropsWithChildren<{
@@ -15,7 +15,7 @@ function screens({navigation, params}: SectionProps): React.JSX.Element {
   return (
     <AppContainer scroll={false}>
       {loading ? (
-        <Skeleton />
+        <UserDetailsSkeleton />
       ) : (
         <UserDetails data={data} navigation={navigation} />
       )}

@@ -5,8 +5,8 @@ import {
   View,
   StatusMessage,
 } from '../../../__shared/components';
-import Skeleton from '../components/user-details.skeleton';
-import UserDetails from '../components/user-details';
+import UserDetailsSkeleton from '../../__shared/components/UserDetails/skeleton';
+import UserDetails from '../../__shared/components/UserDetails';
 import {TextInput, TouchableOpacity} from 'react-native';
 import Requests from '../../../requests';
 
@@ -30,13 +30,11 @@ function screens({navigation}: SectionProps): React.JSX.Element {
     if (inputVal) {
       Requests.GetUser(inputVal)
         .then(res => {
-          console.log(res);
           setloading(false);
           setUserFetched(true);
           setData(res);
         })
         .catch(err => {
-          console.log(err);
           setloading(false);
           setData(null);
           setUserFetched(true);
@@ -94,7 +92,7 @@ function screens({navigation}: SectionProps): React.JSX.Element {
           </Text>
         </TouchableOpacity>
       </View>
-      {loading && <Skeleton />}
+      {loading && <UserDetailsSkeleton />}
       {!loading && isUserFetched && data && (
         <UserDetails data={data} navigation={navigation} />
       )}

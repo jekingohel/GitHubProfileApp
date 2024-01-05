@@ -1,10 +1,10 @@
 import React, {PropsWithChildren} from 'react';
 import {FlatList} from 'react-native';
 
-import ScreensSkeleton from '../components/user_profile.skeleton';
+import ScreensSkeleton from '../components/UserListItem.skeleton';
 import useItem from '../utils/useItem';
 import {AppContainer} from '../../../__shared/components';
-import UserItem from '../components/user_list.item';
+import UserItem from '../components/UserListItem';
 
 type propsType = PropsWithChildren<{
   navigation?: any;

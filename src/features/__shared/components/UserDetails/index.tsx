@@ -8,9 +8,10 @@ import {
   Text,
   View,
   TextWithIcon,
-} from '../../../__shared/components';
-import ActionBtn from './action.button';
-import FormatNumber from '../../../__shared/utils/FormatNumber';
+  ActionButton,
+} from '../../../../__shared/components';
+
+import FormatNumber from '../../../../__shared/utils/FormatNumber';
 
 type propsType = PropsWithChildren<{
   data: any | undefined;
@@ -65,7 +66,7 @@ function UserDetails({
           )}
           {data?.email && (
             <TextWithIcon
-              iconSource={require('../../../images/icon-email.png')}
+              iconSource={require('../../../../images/icon-email.png')}
               imageSize={[16, 16]}
               text={data?.email}
               fontSize={15}
@@ -75,7 +76,7 @@ function UserDetails({
           )}
           {data?.location && (
             <TextWithIcon
-              iconSource={require('../../../images/icon-location.png')}
+              iconSource={require('../../../../images/icon-location.png')}
               imageSize={[16, 16]}
               text={data?.location}
               fontSize={15}
@@ -85,7 +86,7 @@ function UserDetails({
           )}
           {data?.company && (
             <TextWithIcon
-              iconSource={require('../../../images/icon-company.png')}
+              iconSource={require('../../../../images/icon-company.png')}
               imageSize={[16, 16]}
               text={data?.company}
               fontSize={15}
@@ -100,18 +101,18 @@ function UserDetails({
               columnGap: 10,
             }}>
             <Image
-              source={require('../../../images/icon-users.png')}
+              source={require('../../../../images/icon-users.png')}
               style={{width: 16, height: 16}}
               resizeMode="contain"
             />
-            <ActionBtn
+            <ActionButton
               title={FormatNumber(data?.followers)}
               subTitle="followers"
               onPress={() =>
                 data?.followers > 0 && viewFollowersFollowing('followers')
               }
             />
-            <ActionBtn
+            <ActionButton
               title={FormatNumber(data?.following)}
               subTitle="following"
               onPress={() =>

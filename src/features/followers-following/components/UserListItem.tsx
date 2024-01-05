@@ -1,5 +1,5 @@
 import React, {PropsWithChildren} from 'react';
-import {Avatar, Text, View} from '../../../__shared/components';
+import {Avatar, Text} from '../../../__shared/components';
 import {TouchableOpacity} from 'react-native';
 
 type propsType = PropsWithChildren<{
@@ -13,6 +13,7 @@ function UserItem({data = null, navigation}: propsType): React.JSX.Element {
   };
   return (
     <TouchableOpacity
+      testID="user-item-touchable"
       activeOpacity={0.5}
       onPress={viewUserDetails}
       style={{

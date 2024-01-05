@@ -1,6 +1,6 @@
 import React, {PropsWithChildren} from 'react';
 import {TouchableOpacity} from 'react-native';
-import {Text} from '../../../__shared/components';
+import {Text} from '..';
 
 type propsType = PropsWithChildren<{
   subTitle?: string;
@@ -17,6 +17,7 @@ function ActionBtn({
 }: propsType): React.JSX.Element {
   return (
     <TouchableOpacity
+      testID="action-btn-touchable"
       activeOpacity={0.5}
       onPress={onPress}
       style={[

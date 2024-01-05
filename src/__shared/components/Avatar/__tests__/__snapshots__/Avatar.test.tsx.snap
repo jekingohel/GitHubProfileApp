@@ -119,8 +119,8 @@ exports[`renders Avatar with an image correctly 1`] = `
       [
         {
           "borderRadius": 0,
-          "height": 65,
-          "width": 65,
+          "height": 70,
+          "width": 70,
         },
         undefined,
       ]
@@ -186,8 +186,8 @@ exports[`renders Avatar with custom size and color correctly 1`] = `
       [
         {
           "borderRadius": 0,
-          "height": 48,
-          "width": 48,
+          "height": 38,
+          "width": 38,
         },
         undefined,
       ]

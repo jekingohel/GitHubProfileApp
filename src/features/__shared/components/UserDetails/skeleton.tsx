@@ -5,7 +5,7 @@ import {
   Container,
   ScrollableContainer,
   Skeleton,
-} from '../../../__shared/components';
+} from '../../../../__shared/components';
 
 function ScreensSkeleton(): React.JSX.Element {
   return (
