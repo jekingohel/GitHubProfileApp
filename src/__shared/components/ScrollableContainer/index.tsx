@@ -67,38 +67,38 @@ const ScrollableContainer: React.FC<ScrollableContainerProps> = props => {
   }, [scrollToTop, scrollToTopPostion]);
 
   return (
-    <>
-      <Animated.ScrollView
-        testID="scroll-view"
-        ref={scrollRef}
-        keyboardShouldPersistTaps="handled"
-        horizontal={horizontal}
-        showsHorizontalScrollIndicator={horizontal && scrollBar}
-        showsVerticalScrollIndicator={!horizontal && scrollBar}
-        style={[
-          {
-            flex: 1,
-            backgroundColor: backgroundColor,
-            paddingVertical: 15,
-          },
-          wrapperStyle && wrapperStyle,
-        ]}
-        onScroll={onScroll ? onScroll : handelOnScroll}
-        // contentContainerStyle={{flex: 1}}
-        {...restProps}>
-        {props.children}
-      </Animated.ScrollView>
-      {refresh && (
-        <RefreshControl
-          progressBackgroundColor={'#FFFFFF'}
-          colors={['black']}
-          tintColor={'black'}
-          titleColor={'black'}
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-        />
-      )}
-    </>
+    <Animated.ScrollView
+      testID="scroll-view"
+      ref={scrollRef}
+      keyboardShouldPersistTaps="handled"
+      horizontal={horizontal}
+      showsHorizontalScrollIndicator={horizontal && scrollBar}
+      showsVerticalScrollIndicator={!horizontal && scrollBar}
+      style={[
+        {
+          flex: 1,
+          backgroundColor: backgroundColor,
+          paddingVertical: 15,
+        },
+        wrapperStyle && wrapperStyle,
+      ]}
+      refreshControl={
+        refresh ? (
+          <RefreshControl
+            progressBackgroundColor={'#FFFFFF'}
+            colors={['black']}
+            tintColor={'black'}
+            titleColor={'black'}
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        ) : undefined
+      }
+      onScroll={onScroll ? onScroll : handelOnScroll}
+      // contentContainerStyle={{flex: 1}}
+      {...restProps}>
+      {props.children}
+    </Animated.ScrollView>
   );
 };
 

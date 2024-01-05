@@ -4,11 +4,11 @@ import {Image, StyleSheet} from 'react-native';
 import {
   Avatar,
   Container,
-  ScrollableContainer,
   Text,
   View,
   TextWithIcon,
   ActionButton,
+  ScrollableContainer,
 } from '../../../../__shared/components';
 
 import FormatNumber from '../../../../__shared/utils/FormatNumber';
@@ -16,11 +16,15 @@ import FormatNumber from '../../../../__shared/utils/FormatNumber';
 type propsType = PropsWithChildren<{
   data: any | undefined;
   navigation?: any;
+  refreshing?: boolean;
+  onRefresh?: () => void;
 }>;
 
 function UserDetails({
   data = undefined,
   navigation,
+  refreshing = false,
+  onRefresh = () => {},
 }: propsType): React.JSX.Element {
   const viewFollowersFollowing = (type: string) => {
     const userparams = {type: type, login: data?.login};
@@ -31,7 +35,11 @@ function UserDetails({
     }
   };
   return (
-    <ScrollableContainer contentInsetAdjustmentBehavior="automatic">
+    <ScrollableContainer
+      refresh
+      contentInsetAdjustmentBehavior="automatic"
+      refreshing={refreshing}
+      onRefresh={onRefresh}>
       <Container>
         <View transparent style={styles.container}>
           <View transparent style={styles.avatarContainer}>

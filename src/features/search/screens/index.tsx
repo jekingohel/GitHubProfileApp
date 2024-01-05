@@ -25,22 +25,23 @@ function screens({navigation}: SectionProps): React.JSX.Element {
   const [isUserFetched, setUserFetched] = useState<boolean>(false);
 
   const onSubmit = () => {
-    setloading(true);
-
     if (inputVal) {
       Requests.GetUser(inputVal)
         .then(res => {
           setloading(false);
+          setRefreshing(false);
           setUserFetched(true);
           setData(res);
         })
         .catch(err => {
           setloading(false);
+          setRefreshing(false);
           setData(null);
           setUserFetched(true);
         });
     } else {
       setloading(false);
+      setRefreshing(false);
       setData(null);
     }
   };
@@ -86,7 +87,12 @@ function screens({navigation}: SectionProps): React.JSX.Element {
           onChangeText={handleOnChange}
           placeholder="Search User"
         />
-        <TouchableOpacity activeOpacity={0.5} onPress={onSubmit}>
+        <TouchableOpacity
+          activeOpacity={0.5}
+          onPress={() => {
+            setloading(true);
+            onSubmit();
+          }}>
           <Text fontSize={18} lineHeight={30} color="#3399ff">
             Submit
           </Text>
@@ -94,7 +100,12 @@ function screens({navigation}: SectionProps): React.JSX.Element {
       </View>
       {loading && <UserDetailsSkeleton />}
       {!loading && isUserFetched && data && (
-        <UserDetails data={data} navigation={navigation} />
+        <UserDetails
+          data={data}
+          navigation={navigation}
+          refreshing={refreshing}
+          onRefresh={onRefresh}
+        />
       )}
       {!loading && isUserFetched && data === null && inputVal !== '' && (
         <StatusMessage

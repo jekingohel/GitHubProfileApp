@@ -1,4 +1,4 @@
-import React, {PropsWithChildren} from 'react';
+import React, {PropsWithChildren, useState} from 'react';
 import {FlatList} from 'react-native';
 
 import ScreensSkeleton from '../components/UserListItem.skeleton';
@@ -12,7 +12,8 @@ type propsType = PropsWithChildren<{
 }>;
 
 function screens({params, navigation}: propsType): React.JSX.Element {
-  const {data, loading} = useItem(params);
+  const {data, loading, refreshing, onRefresh} = useItem(params);
+
   return (
     <AppContainer scroll={false}>
       {loading ? (
@@ -20,6 +21,8 @@ function screens({params, navigation}: propsType): React.JSX.Element {
       ) : (
         <FlatList
           data={data}
+          onRefresh={onRefresh}
+          refreshing={refreshing}
           renderItem={({item}) => (
             <UserItem data={item} navigation={navigation} />
           )}
