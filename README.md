@@ -2,6 +2,9 @@
 
 This mobile application allows users to search for GitHub profiles by username, view user details, and navigate through followers and following lists. The app fetches GitHub user data using the [GitHub REST API](https://docs.github.com/en/rest).
 
+## Screenshot
+![screenshot](https://github.com/jekingohel/GitHubProfileApp/assets/2361463/27e2ffa4-c789-4195-b194-7e8585c0960b)
+
 ## Features
 
 ### User Search
